@@ -12,6 +12,12 @@ const calculator = {
 };
 
 
+// Update the display
+function updateDisplay() {
+    screen.textContent = calculator.displayValue;
+}
+
+
 
 
 });
