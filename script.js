@@ -64,6 +64,14 @@ function inputOperator(nextOperator) {
     }
 }
 
+ // Perform calculations
+ const performCalculation = {
+    '+': (x, y) => x + y,
+    '-': (x, y) => x - y,
+    '*': (x, y) => x * y,
+    '/': (x, y) => x / y,
+};
+
  // Handle key clicks
  keys.forEach((key) => {
     key.addEventListener('click', () => {
