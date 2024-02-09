@@ -31,6 +31,39 @@ function updateDisplay() {
     }
 }
 
+/*
+
+inputOperator needs to be defined
+Multiplication and division value from const keyValue = key.textContent; may be an issue
+
+*/
+
+// Handle operator input
+function inputOperator(nextOperator) {
+    const { firstOperand, displayValue, operator } = calculator;
+    const inputValue = parseFloat(displayValue);
+
+    if (operator && calculator.waitingForSecondOperand) {
+        calculator.operator = nextOperator;
+        return;
+    }
+
+    if (firstOperand === null && !isNaN(inputValue)) {
+        calculator.firstOperand = inputValue;
+    } else if (operator) {
+        const result = performCalculation[operator](firstOperand, inputValue);
+        calculator.displayValue = String(result);
+        calculator.firstOperand = result;
+    }
+
+    calculator.waitingForSecondOperand = true;
+
+    // Only set the operator if it's not the equal sign
+    if (nextOperator !== '=') {
+        calculator.operator = nextOperator;
+    }
+}
+
  // Handle key clicks
  keys.forEach((key) => {
     key.addEventListener('click', () => {
