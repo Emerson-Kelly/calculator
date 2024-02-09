@@ -57,11 +57,9 @@ function inputOperator(nextOperator) {
     }
 
     calculator.waitingForSecondOperand = true;
+    calculator.operator = nextOperator;
+    
 
-    // Only set the operator if it's not the equal sign
-    if (nextOperator !== '=') {
-        calculator.operator = nextOperator;
-    }
 }
 
  // Perform calculations
@@ -76,13 +74,20 @@ function inputOperator(nextOperator) {
  keys.forEach((key) => {
     key.addEventListener('click', () => {
         const keyValue = key.textContent;
-
+        if (keyValue === 'x'){
+            inputOperator('*');
+        }
+        else if (keyValue === '÷'){
+            inputOperator('/');
+        }
         if (/\d/.test(keyValue)) {
             inputDigit(keyValue);
             updateDisplay();
             console.table(calculator); // CALCULATOR OBJECT TEST
         } else if (/\+|-|\*|\//.test(keyValue)) {
+          
             inputOperator(keyValue);
+            console.log("test"); //TEST
             console.table(calculator); // CALCULATOR OBJECT TEST
         } else if (keyValue === '=') {
             inputOperator('=');
