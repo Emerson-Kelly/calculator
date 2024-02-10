@@ -33,8 +33,14 @@ function updateDisplay() {
 
 // Handle operator input
 function inputOperator(nextOperator) {
-    const { firstOperand, displayValue, operator } = calculator;
+    const { displayValue, firstOperand, operator } = calculator;
     const inputValue = parseFloat(displayValue);
+
+    if (nextOperator === '+/-') {
+        calculator.displayValue = String(inputValue * -1);
+        console.log(calculator.displayValue);
+        return;
+    }
 
     if (operator && calculator.waitingForSecondOperand) {
         calculator.operator = nextOperator;
@@ -51,8 +57,6 @@ function inputOperator(nextOperator) {
 
     calculator.waitingForSecondOperand = true;
     calculator.operator = nextOperator;
-    
-
 }
 
  // Perform calculations
@@ -68,13 +72,21 @@ function inputOperator(nextOperator) {
  keys.forEach((key) => {
     key.addEventListener('click', () => {
         const keyValue = key.textContent;
-        if (keyValue === 'x'){
+        if (keyValue === '+/-') {
+            console.log(keyValue);
+           
+            inputOperator('+/-');
+            updateDisplay();
+        }
+       
+        else if (keyValue === 'x'){
             inputOperator('*');
         }
+
         else if (keyValue === '÷'){
             inputOperator('/');
         }
-        if (/\d/.test(keyValue)) {
+        else if (/\d/.test(keyValue)) {
             inputDigit(keyValue);
             updateDisplay();
             console.table(calculator); // CALCULATOR OBJECT TEST
