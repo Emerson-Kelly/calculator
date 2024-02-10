@@ -59,7 +59,7 @@ body {
   }
 
   .calculator-key:hover {
-    background-color: #ddd;
+    filter: brightness(85%);
   }
 
   .calculator-key.operator.top {
@@ -68,7 +68,7 @@ body {
   }
 
 .calculator-key.operator.top:hover {
-    background-color: #ddd;
+    filter: brightness(85%);
 }
 
   .calculator-key.double {

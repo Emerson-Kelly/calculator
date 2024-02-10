@@ -31,13 +31,6 @@ function updateDisplay() {
     }
 }
 
-/*
-
-inputOperator needs to be defined
-Multiplication and division value from const keyValue = key.textContent; may be an issue
-
-*/
-
 // Handle operator input
 function inputOperator(nextOperator) {
     const { firstOperand, displayValue, operator } = calculator;
@@ -68,6 +61,7 @@ function inputOperator(nextOperator) {
     '-': (x, y) => x - y,
     '*': (x, y) => x * y,
     '/': (x, y) => x / y,
+    '%': (x, y) => x % y,
 };
 
  // Handle key clicks
@@ -84,7 +78,7 @@ function inputOperator(nextOperator) {
             inputDigit(keyValue);
             updateDisplay();
             console.table(calculator); // CALCULATOR OBJECT TEST
-        } else if (/\+|-|\*|\//.test(keyValue)) {
+        } else if (/\+|-|\*|\/|%/.test(keyValue)) {
           
             inputOperator(keyValue);
             console.log("test"); //TEST
