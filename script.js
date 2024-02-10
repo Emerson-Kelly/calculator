@@ -18,18 +18,26 @@ function updateDisplay() {
 }
 
 
- // Handle digit input
- function inputDigit(digit) {
+// Handle digit input
+function inputDigit(digit) {
     const { displayValue, waitingForSecondOperand } = calculator;
-    
+
     if (waitingForSecondOperand) {
         calculator.displayValue = digit;
         calculator.waitingForSecondOperand = false;
     } else {
-        calculator.displayValue =
-            displayValue === '0' ? digit : displayValue + digit;    
+        // Check if the current displayValue already contains a decimal point
+        if (digit === '.' && !displayValue.includes('.')) {
+            calculator.displayValue = displayValue + digit;
+        } else if (digit !== '.') {
+            calculator.displayValue = displayValue === '0' ? digit : displayValue + digit;
+        }
     }
+
+    console.log('Display Value:', calculator.displayValue);
 }
+
+
 
 // Handle operator input
 function inputOperator(nextOperator) {
@@ -79,6 +87,12 @@ function inputOperator(nextOperator) {
             updateDisplay();
         }
        
+     else if (/\d/.test(keyValue) || keyValue === '.') {
+        // Allow digits and the decimal point
+        inputDigit(keyValue);
+        updateDisplay();
+    }
+
         else if (keyValue === 'x'){
             inputOperator('*');
         }
